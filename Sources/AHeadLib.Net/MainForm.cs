@@ -50,7 +50,9 @@ namespace AHeadLib.Net {
                 LogError("Error: Failed parse export table");
                 return;
             }
-            
+            LogSuccess($"Export table has {exportNames.Count} entries");
+
+            LogInfo("Filtering unsupported symbols...");
             var names = exportNames;
             names.RemoveAll(x => {
                 if (!SyntaxFacts.IsValidIdentifier(x) || x.Contains("@")) {
@@ -61,7 +63,7 @@ namespace AHeadLib.Net {
             });
 
             exportNames = names;
-            LogSuccess($"Export table has {exportNames.Count} entries: ");
+            LogSuccess($"Hijacking following {exportNames.Count} functions: ");
             foreach (var name in exportNames) {
                 Log($"      - {name}");
             }
