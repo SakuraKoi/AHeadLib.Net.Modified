@@ -129,6 +129,10 @@ namespace AHeadLib.Net {
             textLog.AppendText($" [+] {message}{Environment.NewLine}", Color.GreenYellow);
         }
 
+        private void textLog_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
     public static class RichTextBoxExtensions
     {

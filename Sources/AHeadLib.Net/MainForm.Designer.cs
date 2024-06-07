@@ -176,6 +176,7 @@
             this.textLog.Size = new System.Drawing.Size(632, 288);
             this.textLog.TabIndex = 10;
             this.textLog.Text = "";
+            this.textLog.TextChanged += new System.EventHandler(this.textLog_TextChanged);
             // 
             // MainForm
             // 
