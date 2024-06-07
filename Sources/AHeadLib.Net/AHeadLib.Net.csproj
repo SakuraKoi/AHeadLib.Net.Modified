@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeWriter.cs" />
-    <Compile Include="DllExportInfo.cs" />
+    <Compile Include="PEFile.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

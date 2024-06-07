@@ -1,26 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace AHeadLib.Net {
     public partial class MainForm : Form {
+        private List<string> exportNames;
+
         public MainForm() {
             InitializeComponent();
 
 #if DEBUG
             // for test only...
-            editInputFile.Text = "C:\\Windows\\System32\\winmm.dll";
-            editOutputDirectory.Text = "E:\\Desktop\\New Folder";
+            editOutputDirectory.Text = "E:\\test";
+            analyzeFile("C:\\Windows\\System32\\winmm.dll");
 #endif
             var filePath = Assembly.GetExecutingAssembly().Location;
             var fileVersionInfo = FileVersionInfo.GetVersionInfo(filePath);
@@ -32,8 +28,24 @@ namespace AHeadLib.Net {
                 return;
             }
 
-            editInputFile.Text = dialogInputFile.FileName;
+            analyzeFile(dialogInputFile.FileName);
+        }
+
+        private void analyzeFile(string fileName) {
+            textLog.Text = "";
+            editInputFile.Text = fileName;
             editProjectName.Text = Path.GetFileNameWithoutExtension(editInputFile.Text);
+
+            Log($" [*] Analyzing target file {Path.GetFileName(editInputFile.Text)} ...");
+            string arch;
+            PEFile.analyzeFile(editInputFile.Text, out exportNames, out arch);
+            Log($" [+] Export table has {exportNames.Count} entries: ");
+            foreach (var name in exportNames) {
+                Log($"      - {name}");
+            }
+            Log($" [+] Architecture: {arch}");
+            Log("");
+            Log(" [*] Ready to generate");
         }
 
         private void btnOutputDirectoryPick_Click(object sender, EventArgs e) {
@@ -55,14 +67,12 @@ namespace AHeadLib.Net {
                 return;
             }
 
-            var exportNames = DllExportInfo.ReadFromFile(editInputFile.Text);
-
             if (exportNames == null) {
                 MessageBox.Show("Failed get export table.");
                 return;
             }
 
-            var names = exportNames.ToList();
+            var names = exportNames;
             names.RemoveAll(x => {
                 if (!SyntaxFacts.IsValidIdentifier(x) || x.Contains("@")) {
                     Log($"Skip symbol:{x}");
