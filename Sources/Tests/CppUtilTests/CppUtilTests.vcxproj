@@ -129,8 +129,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\AHeadLib.Net\Properties\CppLibs\MemoryPatchConfig.cpp" />
-    <ClCompile Include="..\..\AHeadLib.Net\Properties\CppLibs\MiniTools.cpp" />
     <ClCompile Include="CppUtilTests.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -18,12 +18,6 @@
     <ClCompile Include="CppUtilTests.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AHeadLib.Net\Properties\CppLibs\MiniTools.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AHeadLib.Net\Properties\CppLibs\MemoryPatchConfig.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AHeadLib.Net\Properties\CppLibs\MiniTools.h">

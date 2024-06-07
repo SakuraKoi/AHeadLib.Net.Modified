@@ -75,7 +75,10 @@ namespace AHeadLib.Net {
 
             exportNames = names;
 
-            VSProjectGenerator generator = new VSProjectGenerator(editOutputDirectory.Text, editProjectName.Text, exportNames);
+            VSProjectGenerator generator = new VSProjectGenerator(editOutputDirectory.Text,
+                Path.GetFileName(editInputFile.Text),
+                editProjectName.Text,
+                exportNames);
 
             generator.Write();
 

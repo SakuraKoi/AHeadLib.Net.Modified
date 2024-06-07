@@ -31,30 +31,29 @@
     <ItemGroup>
         <ClCompile Include="GeneratedFiles/${LIB_NAME}_DllMain.c" />
         <ClCompile Include="GeneratedFiles/${LIB_NAME}.c" />
-        <ClCompile Include="GeneratedFiles/BuiltinImplementations.cpp" />
-        <ClCompile Include="Utils/MemoryPatchConfig.cpp" />
-        <ClCompile Include="Utils/MiniTools.cpp" />
         <ClCompile Include="UserFiles/UserImplementations.cpp" />        
-    </ItemGroup>
-    <ItemGroup>
-        <ClInclude Include="Resources/resource.h" />
-        <ClInclude Include="Utils/MemoryPatchConfig.h" />
-        <ClInclude Include="Utils/MiniTools.h" />
-    </ItemGroup>
-    <ItemGroup>
-        <ResourceCompile Include="Resources/${LIB_NAME}.rc" />
-    </ItemGroup>
-    <ItemGroup>
-        <Text Include="Resources/${LIB_NAME}_patch.txt" />
     </ItemGroup>
     <PropertyGroup Label="Globals">
         <VCProjectVersion>17.0</VCProjectVersion>
         <Keyword>Win32Proj</Keyword>
-        <ProjectGuid>{ff3b982e-2504-4209-b3ed-1cd49bcad2ba}</ProjectGuid>
-        <RootNamespace>${LIB_NAME}</RootNamespace>
+        <ProjectGuid>{${PROJECT_ID}}</ProjectGuid>
+        <RootNamespace>${PROJECT_NAME}</RootNamespace>
         <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     </PropertyGroup>
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+	
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+	    <TargetName>${LIB_NAME}</TargetName>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+	    <TargetName>${LIB_NAME}</TargetName>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+	    <TargetName>${LIB_NAME}</TargetName>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	    <TargetName>${LIB_NAME}</TargetName>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
         <ConfigurationType>DynamicLibrary</ConfigurationType>
         <UseDebugLibraries>true</UseDebugLibraries>
