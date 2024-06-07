@@ -1,16 +1,16 @@
 ﻿namespace AHeadLib.Net
 {
-    partial class MainFrom
+    partial class MainForm
     {
         /// <summary>
-        /// 必需的设计器变量。
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 清理所有正在使用的资源。
+        /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,284 +20,167 @@
             base.Dispose(disposing);
         }
 
-        #region Windows 窗体设计器生成的代码
+        #region Windows Form Designer generated code
 
         /// <summary>
-        /// 设计器支持所需的方法 - 不要修改
-        /// 使用代码编辑器修改此方法的内容。
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrom));
-            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.hyperlinkLabelControl_Project = new DevExpress.XtraEditors.HyperlinkLabelControl();
-            this.simpleButton_Exit = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton_Generate = new DevExpress.XtraEditors.SimpleButton();
-            this.memoEdit_Log = new DevExpress.XtraEditors.MemoEdit();
-            this.buttonEdit_OutputDirectory = new DevExpress.XtraEditors.ButtonEdit();
-            this.buttonEdit_InputFile = new DevExpress.XtraEditors.ButtonEdit();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.xtraOpenFileDialog_OpenInputFile = new DevExpress.XtraEditors.XtraOpenFileDialog(this.components);
-            this.xtraFolderBrowserDialog_OpenOutputDirectory = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
-            this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.memoEdit_Log.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit_OutputDirectory.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit_InputFile.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.label1 = new System.Windows.Forms.Label();
+            this.editInputFile = new System.Windows.Forms.TextBox();
+            this.btnInputFilePick = new System.Windows.Forms.Button();
+            this.btnOutputDirectoryPick = new System.Windows.Forms.Button();
+            this.editOutputDirectory = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textLog = new System.Windows.Forms.TextBox();
+            this.btnGenerate = new System.Windows.Forms.Button();
+            this.dialogInputFile = new System.Windows.Forms.OpenFileDialog();
+            this.editProjectName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // layoutControl1
+            // label1
             // 
-            this.layoutControl1.Controls.Add(this.hyperlinkLabelControl_Project);
-            this.layoutControl1.Controls.Add(this.simpleButton_Exit);
-            this.layoutControl1.Controls.Add(this.simpleButton_Generate);
-            this.layoutControl1.Controls.Add(this.memoEdit_Log);
-            this.layoutControl1.Controls.Add(this.buttonEdit_OutputDirectory);
-            this.layoutControl1.Controls.Add(this.buttonEdit_InputFile);
-            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsPrint.AppearanceGroupCaption.BackColor = System.Drawing.Color.LightGray;
-            this.layoutControl1.OptionsPrint.AppearanceGroupCaption.Font = new System.Drawing.Font("Tahoma", 10.25F);
-            this.layoutControl1.OptionsPrint.AppearanceGroupCaption.Options.UseBackColor = true;
-            this.layoutControl1.OptionsPrint.AppearanceGroupCaption.Options.UseFont = true;
-            this.layoutControl1.OptionsPrint.AppearanceGroupCaption.Options.UseTextOptions = true;
-            this.layoutControl1.OptionsPrint.AppearanceGroupCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.layoutControl1.OptionsPrint.AppearanceGroupCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1266, 486);
-            this.layoutControl1.TabIndex = 0;
-            this.layoutControl1.Text = "layoutControl1";
+            this.label1.Location = new System.Drawing.Point(16, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 24);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Input File";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // hyperlinkLabelControl_Project
+            // editInputFile
             // 
-            this.hyperlinkLabelControl_Project.Location = new System.Drawing.Point(12, 442);
-            this.hyperlinkLabelControl_Project.Name = "hyperlinkLabelControl_Project";
-            this.hyperlinkLabelControl_Project.Size = new System.Drawing.Size(378, 25);
-            this.hyperlinkLabelControl_Project.StyleController = this.layoutControl1;
-            this.hyperlinkLabelControl_Project.TabIndex = 9;
-            this.hyperlinkLabelControl_Project.Text = "https://github.com/bodong1987/AHeadLib.Net";
-            this.hyperlinkLabelControl_Project.HyperlinkClick += new DevExpress.Utils.HyperlinkClickEventHandler(this.hyperlinkLabelControl_Project_HyperlinkClick);
+            this.editInputFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.editInputFile.Location = new System.Drawing.Point(128, 16);
+            this.editInputFile.Name = "editInputFile";
+            this.editInputFile.Size = new System.Drawing.Size(392, 21);
+            this.editInputFile.TabIndex = 1;
             // 
-            // simpleButton_Exit
+            // btnInputFilePick
             // 
-            this.simpleButton_Exit.Location = new System.Drawing.Point(1092, 442);
-            this.simpleButton_Exit.Margin = new System.Windows.Forms.Padding(4);
-            this.simpleButton_Exit.Name = "simpleButton_Exit";
-            this.simpleButton_Exit.Size = new System.Drawing.Size(162, 32);
-            this.simpleButton_Exit.StyleController = this.layoutControl1;
-            this.simpleButton_Exit.TabIndex = 8;
-            this.simpleButton_Exit.Text = "Exit";
-            this.simpleButton_Exit.Click += new System.EventHandler(this.simpleButton_Exit_Click);
+            this.btnInputFilePick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInputFilePick.Location = new System.Drawing.Point(519, 15);
+            this.btnInputFilePick.Name = "btnInputFilePick";
+            this.btnInputFilePick.Size = new System.Drawing.Size(42, 23);
+            this.btnInputFilePick.TabIndex = 2;
+            this.btnInputFilePick.Text = "...";
+            this.btnInputFilePick.UseVisualStyleBackColor = true;
+            this.btnInputFilePick.Click += new System.EventHandler(this.btnInputFilePick_Click);
             // 
-            // simpleButton_Generate
+            // btnOutputDirectoryPick
             // 
-            this.simpleButton_Generate.Enabled = false;
-            this.simpleButton_Generate.Location = new System.Drawing.Point(933, 442);
-            this.simpleButton_Generate.Margin = new System.Windows.Forms.Padding(4);
-            this.simpleButton_Generate.Name = "simpleButton_Generate";
-            this.simpleButton_Generate.Size = new System.Drawing.Size(143, 32);
-            this.simpleButton_Generate.StyleController = this.layoutControl1;
-            this.simpleButton_Generate.TabIndex = 7;
-            this.simpleButton_Generate.Text = "Generate";
-            this.simpleButton_Generate.Click += new System.EventHandler(this.simpleButton_Generate_Click);
+            this.btnOutputDirectoryPick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOutputDirectoryPick.Location = new System.Drawing.Point(519, 39);
+            this.btnOutputDirectoryPick.Name = "btnOutputDirectoryPick";
+            this.btnOutputDirectoryPick.Size = new System.Drawing.Size(42, 23);
+            this.btnOutputDirectoryPick.TabIndex = 5;
+            this.btnOutputDirectoryPick.Text = "...";
+            this.btnOutputDirectoryPick.UseVisualStyleBackColor = true;
+            this.btnOutputDirectoryPick.Click += new System.EventHandler(this.btnOutputDirectoryPick_Click);
             // 
-            // memoEdit_Log
+            // editOutputDirectory
             // 
-            this.memoEdit_Log.Location = new System.Drawing.Point(12, 84);
-            this.memoEdit_Log.Margin = new System.Windows.Forms.Padding(4);
-            this.memoEdit_Log.Name = "memoEdit_Log";
-            this.memoEdit_Log.Size = new System.Drawing.Size(1242, 354);
-            this.memoEdit_Log.StyleController = this.layoutControl1;
-            this.memoEdit_Log.TabIndex = 6;
+            this.editOutputDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.editOutputDirectory.Location = new System.Drawing.Point(128, 40);
+            this.editOutputDirectory.Name = "editOutputDirectory";
+            this.editOutputDirectory.Size = new System.Drawing.Size(392, 21);
+            this.editOutputDirectory.TabIndex = 4;
             // 
-            // buttonEdit_OutputDirectory
+            // label2
             // 
-            this.buttonEdit_OutputDirectory.Location = new System.Drawing.Point(162, 48);
-            this.buttonEdit_OutputDirectory.Name = "buttonEdit_OutputDirectory";
-            this.buttonEdit_OutputDirectory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.buttonEdit_OutputDirectory.Size = new System.Drawing.Size(1092, 32);
-            this.buttonEdit_OutputDirectory.StyleController = this.layoutControl1;
-            this.buttonEdit_OutputDirectory.TabIndex = 5;
-            this.buttonEdit_OutputDirectory.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEdit_OutputDirectory_ButtonClick);
-            this.buttonEdit_OutputDirectory.EditValueChanged += new System.EventHandler(this.buttonEdit_OutputDirectory_EditValueChanged);
+            this.label2.Location = new System.Drawing.Point(16, 40);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 24);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Output directory";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // buttonEdit_InputFile
+            // textLog
             // 
-            this.buttonEdit_InputFile.Location = new System.Drawing.Point(162, 12);
-            this.buttonEdit_InputFile.Name = "buttonEdit_InputFile";
-            this.buttonEdit_InputFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.buttonEdit_InputFile.Size = new System.Drawing.Size(1092, 32);
-            this.buttonEdit_InputFile.StyleController = this.layoutControl1;
-            this.buttonEdit_InputFile.TabIndex = 4;
-            this.buttonEdit_InputFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEdit_InputFile_ButtonClick);
-            this.buttonEdit_InputFile.EditValueChanged += new System.EventHandler(this.buttonEdit_InputFile_EditValueChanged);
+            this.textLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textLog.Location = new System.Drawing.Point(16, 96);
+            this.textLog.Multiline = true;
+            this.textLog.Name = "textLog";
+            this.textLog.ReadOnly = true;
+            this.textLog.Size = new System.Drawing.Size(544, 129);
+            this.textLog.TabIndex = 6;
             // 
-            // Root
+            // btnGenerate
             // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem2,
-            this.layoutControlItem3,
-            this.layoutControlItem4,
-            this.layoutControlItem5,
-            this.emptySpaceItem1,
-            this.emptySpaceItem2,
-            this.layoutControlItem6});
-            this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1266, 486);
-            this.Root.TextVisible = false;
+            this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGenerate.Location = new System.Drawing.Point(464, 233);
+            this.btnGenerate.Name = "btnGenerate";
+            this.btnGenerate.Size = new System.Drawing.Size(96, 24);
+            this.btnGenerate.TabIndex = 7;
+            this.btnGenerate.Text = "Generate";
+            this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
-            // layoutControlItem1
+            // dialogInputFile
             // 
-            this.layoutControlItem1.Control = this.buttonEdit_InputFile;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1246, 36);
-            this.layoutControlItem1.Text = "Input File:";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(138, 25);
+            this.dialogInputFile.Filter = "DLL|*.dll";
             // 
-            // layoutControlItem2
+            // editProjectName
             // 
-            this.layoutControlItem2.Control = this.buttonEdit_OutputDirectory;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 36);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(1246, 36);
-            this.layoutControlItem2.Text = "Output Directory:";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(138, 25);
+            this.editProjectName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.editProjectName.Location = new System.Drawing.Point(128, 64);
+            this.editProjectName.Name = "editProjectName";
+            this.editProjectName.Size = new System.Drawing.Size(432, 21);
+            this.editProjectName.TabIndex = 9;
             // 
-            // layoutControlItem3
+            // label3
             // 
-            this.layoutControlItem3.Control = this.memoEdit_Log;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 72);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(1246, 358);
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
+            this.label3.Location = new System.Drawing.Point(16, 64);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 24);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Project Name";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // layoutControlItem4
+            // MainForm
             // 
-            this.layoutControlItem4.Control = this.simpleButton_Generate;
-            this.layoutControlItem4.Location = new System.Drawing.Point(921, 430);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(147, 36);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.simpleButton_Exit;
-            this.layoutControlItem5.Location = new System.Drawing.Point(1080, 430);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(166, 36);
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextVisible = false;
-            // 
-            // emptySpaceItem1
-            // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(382, 430);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(539, 36);
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // emptySpaceItem2
-            // 
-            this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(1068, 430);
-            this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(12, 36);
-            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.Control = this.hyperlinkLabelControl_Project;
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 430);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(382, 36);
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextVisible = false;
-            // 
-            // xtraOpenFileDialog_OpenInputFile
-            // 
-            this.xtraOpenFileDialog_OpenInputFile.FileName = "xtraOpenFileDialog1";
-            this.xtraOpenFileDialog_OpenInputFile.Filter = "Dynamic Library Files (*.dll)|*.dll";
-            // 
-            // xtraFolderBrowserDialog_OpenOutputDirectory
-            // 
-            this.xtraFolderBrowserDialog_OpenOutputDirectory.DialogStyle = DevExpress.Utils.CommonDialogs.FolderBrowserDialogStyle.Wide;
-            this.xtraFolderBrowserDialog_OpenOutputDirectory.SelectedPath = "xtraFolderBrowserDialog1";
-            // 
-            // MainFrom
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1266, 486);
-            this.Controls.Add(this.layoutControl1);
-            this.IconOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("MainFrom.IconOptions.SvgImage")));
-            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.Name = "MainFrom";
-            this.Text = "AHeadLib.Net v1.0.0.0";
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
-            this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.memoEdit_Log.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit_OutputDirectory.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit_InputFile.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            this.ClientSize = new System.Drawing.Size(574, 274);
+            this.Controls.Add(this.btnOutputDirectoryPick);
+            this.Controls.Add(this.btnInputFilePick);
+            this.Controls.Add(this.editOutputDirectory);
+            this.Controls.Add(this.editInputFile);
+            this.Controls.Add(this.editProjectName);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btnGenerate);
+            this.Controls.Add(this.textLog);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "MainForm";
+            this.Text = "AHeadLib.Net";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.ButtonEdit buttonEdit_OutputDirectory;
-        private DevExpress.XtraEditors.ButtonEdit buttonEdit_InputFile;
-        private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton_Exit;
-        private DevExpress.XtraEditors.SimpleButton simpleButton_Generate;
-        private DevExpress.XtraEditors.MemoEdit memoEdit_Log;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
-        private DevExpress.XtraEditors.XtraOpenFileDialog xtraOpenFileDialog_OpenInputFile;
-        private DevExpress.XtraEditors.XtraFolderBrowserDialog xtraFolderBrowserDialog_OpenOutputDirectory;
-        private DevExpress.XtraEditors.HyperlinkLabelControl hyperlinkLabelControl_Project;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox editInputFile;
+        private System.Windows.Forms.Button btnInputFilePick;
+        private System.Windows.Forms.Button btnOutputDirectoryPick;
+        private System.Windows.Forms.TextBox editOutputDirectory;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textLog;
+        private System.Windows.Forms.Button btnGenerate;
+        private System.Windows.Forms.OpenFileDialog dialogInputFile;
+        private System.Windows.Forms.TextBox editProjectName;
+        private System.Windows.Forms.Label label3;
     }
 }
-

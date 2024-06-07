@@ -1,89 +1,70 @@
-﻿using DevExpress.XtraEditors;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.CodeAnalysis.CSharp;
-using System.Reflection;
 
-namespace AHeadLib.Net
-{
-    public partial class MainFrom : DevExpress.XtraEditors.XtraForm
-    {
-        public MainFrom()
-        {
+namespace AHeadLib.Net {
+    public partial class MainForm : Form {
+        public MainForm() {
             InitializeComponent();
 
 #if DEBUG
             // for test only...
-            buttonEdit_InputFile.Text = "C:\\Windows\\System32\\winmm.dll";
-            buttonEdit_OutputDirectory.Text = "E:\\Desktop\\New Folder";
+            editInputFile.Text = "C:\\Windows\\System32\\winmm.dll";
+            editOutputDirectory.Text = "E:\\Desktop\\New Folder";
 #endif
             var filePath = Assembly.GetExecutingAssembly().Location;
-
             var fileVersionInfo = FileVersionInfo.GetVersionInfo(filePath);
-
-            Text = $"AHeadLib.Net v{fileVersionInfo.FileVersion}";
+            Text = $"AHeadLib.Net Modified v{fileVersionInfo.FileVersion}";
         }
 
-        private void buttonEdit_InputFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            if(xtraOpenFileDialog_OpenInputFile.ShowDialog() != DialogResult.OK)
-            {
+        private void btnInputFilePick_Click(object sender, EventArgs e) {
+            if (dialogInputFile.ShowDialog() != DialogResult.OK) {
                 return;
             }
 
-            buttonEdit_InputFile.Text = xtraOpenFileDialog_OpenInputFile.FileName;
+            editInputFile.Text = dialogInputFile.FileName;
+            editProjectName.Text = Path.GetFileNameWithoutExtension(editInputFile.Text);
         }
 
-        private void buttonEdit_OutputDirectory_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            if(xtraFolderBrowserDialog_OpenOutputDirectory.ShowDialog() != DialogResult.OK) 
-            {
+        private void btnOutputDirectoryPick_Click(object sender, EventArgs e) {
+            using var fbd = new FolderBrowserDialog();
+            DialogResult result = fbd.ShowDialog();
+            if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath)) {
+                editOutputDirectory.Text = fbd.SelectedPath;
+            }
+        }
+
+        private void btnGenerate_Click(object sender, EventArgs e) {
+            if (!File.Exists(editInputFile.Text)) {
+                MessageBox.Show("Input file is not exists.");
                 return;
             }
 
-            buttonEdit_OutputDirectory.Text = xtraFolderBrowserDialog_OpenOutputDirectory.SelectedPath;
-        }
-
-        private void RefershGenerateButtonState()
-        {
-            simpleButton_Generate.Enabled = 
-                !string.IsNullOrEmpty(buttonEdit_InputFile.Text) && File.Exists(buttonEdit_InputFile.Text) &&
-                !string.IsNullOrEmpty(buttonEdit_OutputDirectory.Text) && Directory.Exists(buttonEdit_OutputDirectory.Text);
-        }
-
-        private void simpleButton_Generate_Click(object sender, EventArgs e)
-        {
-            if(!File.Exists(buttonEdit_InputFile.Text))
-            {
-                XtraMessageBox.Show("Input file is not exists.");
+            if (!Directory.Exists(editOutputDirectory.Text)) {
+                MessageBox.Show("Output Directory is not exists.");
                 return;
             }
 
-            if(!Directory.Exists(buttonEdit_OutputDirectory.Text))
-            {
-                XtraMessageBox.Show("Output Directory is not exists.");
-                return;
-            }
+            var exportNames = DllExportInfo.ReadFromFile(editInputFile.Text);
 
-            var exportNames = DllExportInfo.ReadFromFile(buttonEdit_InputFile.Text);
-
-            if(exportNames == null)
-            {
-                XtraMessageBox.Show("Failed get export table.");
+            if (exportNames == null) {
+                MessageBox.Show("Failed get export table.");
                 return;
             }
 
             var names = exportNames.ToList();
-            names.RemoveAll(x =>
-            {
-                if (!SyntaxFacts.IsValidIdentifier(x) || x.Contains("@"))
-                {
+            names.RemoveAll(x => {
+                if (!SyntaxFacts.IsValidIdentifier(x) || x.Contains("@")) {
                     Log($"Skip symbol:{x}");
 
                     return true;
@@ -94,36 +75,15 @@ namespace AHeadLib.Net
 
             exportNames = names;
 
-            VSProjectGenerator generator = new VSProjectGenerator(buttonEdit_OutputDirectory.Text, Path.GetFileName(buttonEdit_InputFile.Text), exportNames);
+            VSProjectGenerator generator = new VSProjectGenerator(editOutputDirectory.Text, editProjectName.Text, exportNames);
 
             generator.Write();
 
             Log("Write Finished.");
         }
 
-        private void buttonEdit_InputFile_EditValueChanged(object sender, EventArgs e)
-        {
-            RefershGenerateButtonState();
-        }
-
-        private void buttonEdit_OutputDirectory_EditValueChanged(object sender, EventArgs e)
-        {
-            RefershGenerateButtonState();
-        }
-
-        private void Log(string message)
-        {
-            memoEdit_Log.AppendText(message + Environment.NewLine);  
-        }
-
-        private void simpleButton_Exit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void hyperlinkLabelControl_Project_HyperlinkClick(object sender, DevExpress.Utils.HyperlinkClickEventArgs e)
-        {
-            Process.Start("https://github.com/bodong1987/AHeadLib.Net");
+        private void Log(string message) {
+            textLog.AppendText(message + Environment.NewLine);
         }
     }
 }
