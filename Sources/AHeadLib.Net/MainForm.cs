@@ -90,6 +90,11 @@ namespace AHeadLib.Net {
                 return;
             }
 
+            if (editProjectName.Text.Trim().Length == 0) {
+                LogError("Error: Project name is empty");
+                return;
+            }
+
             if (exportNames == null) {
                 LogError("Error: Failed parse export table");
                 return;
