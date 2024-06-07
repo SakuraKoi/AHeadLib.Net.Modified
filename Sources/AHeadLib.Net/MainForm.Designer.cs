@@ -54,6 +54,8 @@
             // 
             // editInputFile
             // 
+            this.editInputFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.editInputFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.editInputFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.editInputFile.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -65,6 +67,7 @@
             // 
             // btnInputFilePick
             // 
+            this.btnInputFilePick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInputFilePick.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.btnInputFilePick.FlatAppearance.BorderSize = 0;
             this.btnInputFilePick.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -79,6 +82,7 @@
             // 
             // btnOutputDirectoryPick
             // 
+            this.btnOutputDirectoryPick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOutputDirectoryPick.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.btnOutputDirectoryPick.FlatAppearance.BorderSize = 0;
             this.btnOutputDirectoryPick.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -93,6 +97,8 @@
             // 
             // editOutputDirectory
             // 
+            this.editOutputDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.editOutputDirectory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.editOutputDirectory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.editOutputDirectory.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -114,11 +120,12 @@
             // 
             // btnGenerate
             // 
+            this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenerate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.btnGenerate.FlatAppearance.BorderSize = 0;
             this.btnGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerate.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnGenerate.Location = new System.Drawing.Point(520, 544);
+            this.btnGenerate.Location = new System.Drawing.Point(520, 408);
             this.btnGenerate.Margin = new System.Windows.Forms.Padding(4);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(131, 40);
@@ -133,6 +140,8 @@
             // 
             // editProjectName
             // 
+            this.editProjectName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.editProjectName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.editProjectName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.editProjectName.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -154,6 +163,9 @@
             // 
             // textLog
             // 
+            this.textLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.textLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -161,7 +173,7 @@
             this.textLog.Location = new System.Drawing.Point(16, 112);
             this.textLog.Name = "textLog";
             this.textLog.ReadOnly = true;
-            this.textLog.Size = new System.Drawing.Size(632, 424);
+            this.textLog.Size = new System.Drawing.Size(632, 288);
             this.textLog.TabIndex = 10;
             this.textLog.Text = "";
             // 
@@ -170,7 +182,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
-            this.ClientSize = new System.Drawing.Size(665, 601);
+            this.ClientSize = new System.Drawing.Size(665, 465);
             this.Controls.Add(this.textLog);
             this.Controls.Add(this.btnOutputDirectoryPick);
             this.Controls.Add(this.btnInputFilePick);
@@ -183,7 +195,6 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
