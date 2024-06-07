@@ -64,6 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeWriter.cs" />
+    <Compile Include="DarkModeCS.cs" />
+    <Compile Include="FlatComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PEFile.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
