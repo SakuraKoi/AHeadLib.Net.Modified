@@ -120,18 +120,13 @@ namespace AHeadLib.Net {
             textLog.AppendText($" [*] {message}{Environment.NewLine}", Color.WhiteSmoke);
         }
         private void LogWarn(string message) {
-            textLog.AppendText($" [*] {message}{Environment.NewLine}", Color.Yellow);
+            textLog.AppendText($" [*] {message}{Environment.NewLine}", Color.FromArgb(0xffeb3b));
         }
         private void LogError(string message) {
-            textLog.AppendText($" [-] {message}{Environment.NewLine}", Color.Red);
+            textLog.AppendText($" [-] {message}{Environment.NewLine}", Color.FromArgb(0xf44336));
         }
         private void LogSuccess(string message) {
-            textLog.AppendText($" [+] {message}{Environment.NewLine}", Color.GreenYellow);
-        }
-
-        private void textLog_TextChanged(object sender, EventArgs e)
-        {
-
+            textLog.AppendText($" [+] {message}{Environment.NewLine}", Color.FromArgb(0xc6ff00));
         }
     }
     public static class RichTextBoxExtensions
