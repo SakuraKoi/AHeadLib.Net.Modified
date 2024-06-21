@@ -4,6 +4,7 @@
 
 - DevExpress dependency removed 
 - Builtin patcher feature removed
+- Custom project name
 - More stylished ui (? 
 
 
