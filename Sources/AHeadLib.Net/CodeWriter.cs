@@ -15,10 +15,12 @@ namespace AHeadLib.Net
         /// The failure
         /// </summary>
         Failure,
+
         /// <summary>
         /// The success
         /// </summary>
         Success,
+
         /// <summary>
         /// The ignore when no changes
         /// </summary>
@@ -41,18 +43,18 @@ namespace AHeadLib.Net
         /// <summary>
         /// The buffer
         /// </summary>
-    	private readonly StringBuilder _buffer = new();
+        private readonly StringBuilder _buffer = new();
 
         /// <summary>
         /// The indent level
         /// </summary>
-    	private int _indentLevel;
+        private int _indentLevel;
 
         /// <summary>
         /// The z fast access string
         /// </summary>
-    	private static readonly string[] ZFastAccessString =
-    	[
+        private static readonly string[] ZFastAccessString =
+        [
             (""),
             ("    "),
             ("        "),
@@ -64,7 +66,7 @@ namespace AHeadLib.Net
             ("                                "),
             ("                                    "),
             ("                                        ")
-    	];
+        ];
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CodeWriter" /> class.
@@ -93,7 +95,7 @@ namespace AHeadLib.Net
                 WriteLeftBrace();
             }
 
-        	++_indentLevel;
+            ++_indentLevel;
         }
 
         /// <summary>
@@ -117,12 +119,12 @@ namespace AHeadLib.Net
         /// <returns>System.String.</returns>
         public string GetScopedSpace()
         {
-            if (_indentLevel >= 0 && _indentLevel < Z_FastAccessString.Length)
+            if (_indentLevel >= 0 && _indentLevel < ZFastAccessString.Length)
             {
-            	return ZFastAccessString[_indentLevel];
+                return ZFastAccessString[_indentLevel];
             }
 
-        	return "".PadRight(_indentLevel * 4);
+            return "".PadRight(_indentLevel * 4);
         }
 
         /// <summary>
@@ -130,7 +132,7 @@ namespace AHeadLib.Net
         /// </summary>
         private void WriteIndent()
         {
-        	_buffer.Append(GetScopedSpace());
+            _buffer.Append(GetScopedSpace());
         }
 
         /// <summary>
@@ -139,7 +141,7 @@ namespace AHeadLib.Net
         /// <param name="withSemicolon">if set to <c>true</c> [with semicolon].</param>
         private void WriteRightBrace(bool withSemicolon)
         {
-        	Write(withSemicolon ? "};" : "}");
+            Write(withSemicolon ? "};" : "}");
         }
 
         /// <summary>
@@ -157,7 +159,7 @@ namespace AHeadLib.Net
         public void Write(string text)
         {
             WriteIndent();
-        	_buffer.Append(text);
+            _buffer.Append(text);
             WriteNewLine();
         }
 
@@ -166,7 +168,7 @@ namespace AHeadLib.Net
         /// </summary>
         public void WriteNewLine()
         {
-        	_buffer.Append("\n");
+            _buffer.Append("\n");
         }
 
         /// <summary>
@@ -179,188 +181,189 @@ namespace AHeadLib.Net
         public void WriteProperty(string type, string name, string defaultValue, int padding)
         {
             Write(string.Format("{0} {1}{2}{3}",
-                type.PadRight(padding),
-                name,
-                !string.IsNullOrEmpty(defaultValue) ? "=" : "",
-                !string.IsNullOrEmpty(defaultValue) ? defaultValue : ""
-            )
-        );
-    }
+                    type.PadRight(padding),
+                    name,
+                    !string.IsNullOrEmpty(defaultValue) ? "=" : "",
+                    !string.IsNullOrEmpty(defaultValue) ? defaultValue : ""
+                )
+            );
+        }
 
-    /// <summary>
-    /// The reserve symbols
-    /// </summary>
-    private static readonly KeyValuePair<string, string>[] ReserveSymbols =
-    [
-        new KeyValuePair<string, string>("<see cref", "__see_ref_symbol__"),
-        new KeyValuePair<string, string>("/>", "__right_gt_symbol__")
-    ];
+        /// <summary>
+        /// The reserve symbols
+        /// </summary>
+        private static readonly KeyValuePair<string, string>[] ReserveSymbols =
+        [
+            new KeyValuePair<string, string>("<see cref", "__see_ref_symbol__"),
+            new KeyValuePair<string, string>("/>", "__right_gt_symbol__")
+        ];
 
-    /// <summary>
-    /// Writes C# style comments
-    /// </summary>
-    /// <param name="comment">The comment.</param>
-    /// <param name="tag">The tag.</param>
-    /// <param name="attribute">The attribute.</param>
-    public void WriteComment(string comment, string tag = "summary", string attribute = "")
-    {
-        if (comment.IsNotNullOrEmpty() || attribute.IsNotNullOrEmpty())
+        /// <summary>
+        /// Writes C# style comments
+        /// </summary>
+        /// <param name="comment">The comment.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="attribute">The attribute.</param>
+        public void WriteComment(string comment, string tag = "summary", string attribute = "")
         {
-            comment = ReserveSymbols.Aggregate(comment, (current, r) => current.Replace(r.Key, r.Value));
-
-            // remove xml special character                
-            comment = comment.Replace("&", "&amp;");
-            comment = comment.Replace("<", "&lt;");
-            comment = comment.Replace(">", "&gt;");
-            //comment = comment.Replace("'", "&apos;");
-            //comment = comment.Replace("\"", "&quot;");
-
-            comment = ReserveSymbols.Aggregate(comment, (current, r) => current.Replace(r.Value, r.Key));
-
-            var lines = comment.Split('\n').ToList();
-            lines.RemoveAll(x => x.Trim().IsNullOrEmpty());
-
-            if (lines.Count > 1 || tag.iEquals("summary"))
+            if (comment.IsNotNullOrEmpty() || attribute.IsNotNullOrEmpty())
             {
-                Write($"/// <{tag}{(attribute.IsNullOrEmpty() ? "" : " " + attribute)}>");
+                comment = ReserveSymbols.Aggregate(comment, (current, r) => current.Replace(r.Key, r.Value));
 
-                foreach (var text in lines)
-                {
-                    Write($"/// {text.Trim()}");
-                }
+                // remove xml special character                
+                comment = comment.Replace("&", "&amp;");
+                comment = comment.Replace("<", "&lt;");
+                comment = comment.Replace(">", "&gt;");
+                //comment = comment.Replace("'", "&apos;");
+                //comment = comment.Replace("\"", "&quot;");
 
-                Write($"/// </{tag}>");
-            }
-            else
-            {
-                if (lines.Count <= 0 || lines[0].IsNullOrEmpty())
+                comment = ReserveSymbols.Aggregate(comment, (current, r) => current.Replace(r.Value, r.Key));
+
+                var lines = comment.Split('\n').ToList();
+                lines.RemoveAll(x => x.Trim().IsNullOrEmpty());
+
+                if (lines.Count > 1 || tag.iEquals("summary"))
                 {
-                    Write($"/// <{tag}{(attribute.IsNullOrEmpty() ? "" : " " + attribute)}/>");
+                    Write($"/// <{tag}{(attribute.IsNullOrEmpty() ? "" : " " + attribute)}>");
+
+                    foreach (var text in lines)
+                    {
+                        Write($"/// {text.Trim()}");
+                    }
+
+                    Write($"/// </{tag}>");
                 }
                 else
                 {
-                    Write($"/// <{tag}{(attribute.IsNullOrEmpty() ? "" : " " + attribute)}>{lines[0]}</{tag}>");
+                    if (lines.Count <= 0 || lines[0].IsNullOrEmpty())
+                    {
+                        Write($"/// <{tag}{(attribute.IsNullOrEmpty() ? "" : " " + attribute)}/>");
+                    }
+                    else
+                    {
+                        Write($"/// <{tag}{(attribute.IsNullOrEmpty() ? "" : " " + attribute)}>{lines[0]}</{tag}>");
+                    }
                 }
-
             }
         }
-    }
 
-    /// <summary>
-    /// Writes the common comment.
-    /// </summary>
-    /// <param name="comment">The comment.</param>
-    public void WriteCommonComment(string comment)
-    {
-        if (comment.IsNotNullOrEmpty())
+        /// <summary>
+        /// Writes the common comment.
+        /// </summary>
+        /// <param name="comment">The comment.</param>
+        public void WriteCommonComment(string comment)
         {
-            var lines = comment.Split('\n').ToList();
-            lines.RemoveAll(x => x.Trim().IsNullOrEmpty());
-
-            foreach (var text in lines)
+            if (comment.IsNotNullOrEmpty())
             {
-                Write($"// {text.Trim()}");
+                var lines = comment.Split('\n').ToList();
+                lines.RemoveAll(x => x.Trim().IsNullOrEmpty());
+
+                foreach (var text in lines)
+                {
+                    Write($"// {text.Trim()}");
+                }
             }
         }
-    }
 
-    /// <summary>
-    /// Saves the specified target path.
-    /// </summary>
-    /// <param name="targetPath">The target path.</param>
-    /// <param name="forceSave">if set to <c>true</c> [force save].</param>
-    /// <returns>ECodeWriterSaveResult.</returns>
-    public ECodeWriterSaveResult Save(string targetPath, bool forceSave = false)
-    {
-        TargetPath = targetPath;
-        return Save(forceSave);
-    }
-
-    /// <summary>
-    /// Saves the specified force save.
-    /// </summary>
-    /// <param name="forceSave">if set to <c>true</c> [force save].</param>
-    /// <returns>ECodeWriterSaveResult.</returns>
-    public ECodeWriterSaveResult Save(bool forceSave = false)
-    {
-        System.Diagnostics.Debug.Assert(TargetPath != null);
-
-        if (string.IsNullOrEmpty(TargetPath))
+        /// <summary>
+        /// Saves the specified target path.
+        /// </summary>
+        /// <param name="targetPath">The target path.</param>
+        /// <param name="forceSave">if set to <c>true</c> [force save].</param>
+        /// <returns>ECodeWriterSaveResult.</returns>
+        public ECodeWriterSaveResult Save(string targetPath, bool forceSave = false)
         {
-            return ECodeWriterSaveResult.Failure;
+            TargetPath = targetPath;
+            return Save(forceSave);
         }
 
-        // check is any changed?
-        var text = _buffer.ToString();
-        var utf8Codes = Encoding.UTF8.GetBytes(text);
-        if (!forceSave && File.Exists(TargetPath))
+        /// <summary>
+        /// Saves the specified force save.
+        /// </summary>
+        /// <param name="forceSave">if set to <c>true</c> [force save].</param>
+        /// <returns>ECodeWriterSaveResult.</returns>
+        public ECodeWriterSaveResult Save(bool forceSave = false)
         {
-            var existsBytes = File.ReadAllBytes(TargetPath!);
+            System.Diagnostics.Debug.Assert(TargetPath != null);
 
-            if (ByteArraysEqual(existsBytes, utf8Codes))
+            if (string.IsNullOrEmpty(TargetPath))
             {
-                // same file, skip write
-                return ECodeWriterSaveResult.IgnoreWhenNoChanges;
+                return ECodeWriterSaveResult.Failure;
             }
+
+            // check is any changed?
+            var text = _buffer.ToString();
+            var utf8Codes = Encoding.UTF8.GetBytes(text);
+            if (!forceSave && File.Exists(TargetPath))
+            {
+                var existsBytes = File.ReadAllBytes(TargetPath!);
+
+                if (ByteArraysEqual(existsBytes, utf8Codes))
+                {
+                    // same file, skip write
+                    return ECodeWriterSaveResult.IgnoreWhenNoChanges;
+                }
+            }
+
+            if (!Directory.Exists(Path.GetDirectoryName(TargetPath!)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(TargetPath)!);
+            }
+
+            File.WriteAllBytes(TargetPath!, utf8Codes);
+
+            return ECodeWriterSaveResult.Success;
         }
 
-        if(!Directory.Exists(Path.GetDirectoryName(TargetPath!)))
+        private static bool ByteArraysEqual(byte[] existsBytes, byte[] utf8Codes)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(TargetPath)!);
+            if (existsBytes.Length != utf8Codes.Length)
+            {
+                return false;
+            }
+
+            return !existsBytes.Where((t, i) => t != utf8Codes[i]).Any();
         }
-
-        File.WriteAllBytes(TargetPath!, utf8Codes);
-
-        return ECodeWriterSaveResult.Success;
     }
 
-    private static bool ByteArraysEqual(byte[] existsBytes, byte[] utf8Codes)
-    {
-        if(existsBytes.Length != utf8Codes.Length)
-        {
-            return false;
-        }
-
-        return !existsBytes.Where((t, i) => t != utf8Codes[i]).Any();
-    }
-}
-
-/// <summary>
-/// Class ScopedCodeWriter.
-/// Implements the <see cref="System.IDisposable" />
-/// </summary>
-/// <seealso cref="System.IDisposable" />
+    /// <summary>
+    /// Class ScopedCodeWriter.
+    /// Implements the <see cref="System.IDisposable" />
+    /// </summary>
+    /// <seealso cref="System.IDisposable" />
 // ReSharper disable once UnusedType.Global
-public class ScopedCodeWriter : IDisposable
-{
-    /// <summary>
-    /// The writer
-    /// </summary>
-    private readonly CodeWriter _writer;
-    /// <summary>
-    /// The with brace
-    /// </summary>
-    private readonly bool _withBrace, _withSemicolon;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ScopedCodeWriter" /> class.
-    /// </summary>
-    /// <param name="codeWriter">The code writer.</param>
-    /// <param name="withBrace">if set to <c>true</c> [with brace].</param>
-    /// <param name="withSemicolon">if set to <c>true</c> [with semicolon].</param>
-    public ScopedCodeWriter(CodeWriter codeWriter, bool withBrace = true, bool withSemicolon = false)
+    public class ScopedCodeWriter : IDisposable
     {
-        _writer = codeWriter;
-        _writer.BeginIdent(withBrace);
-        _withBrace = withBrace;
-        _withSemicolon = withSemicolon;
-    }
+        /// <summary>
+        /// The writer
+        /// </summary>
+        private readonly CodeWriter _writer;
 
-    /// <summary>
-    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-    /// </summary>
-    public void Dispose()
-    {
-        _writer.EndIdent(_withBrace, _withSemicolon);
+        /// <summary>
+        /// The with brace
+        /// </summary>
+        private readonly bool _withBrace, _withSemicolon;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ScopedCodeWriter" /> class.
+        /// </summary>
+        /// <param name="codeWriter">The code writer.</param>
+        /// <param name="withBrace">if set to <c>true</c> [with brace].</param>
+        /// <param name="withSemicolon">if set to <c>true</c> [with semicolon].</param>
+        public ScopedCodeWriter(CodeWriter codeWriter, bool withBrace = true, bool withSemicolon = false)
+        {
+            _writer = codeWriter;
+            _writer.BeginIdent(withBrace);
+            _withBrace = withBrace;
+            _withSemicolon = withSemicolon;
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            _writer.EndIdent(_withBrace, _withSemicolon);
+        }
     }
 }

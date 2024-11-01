@@ -6,7 +6,7 @@
 #include <windows.h>
 
 extern void CheckedLoad();
-extern void ExecuteUserCutomCodes();
+extern void ExecuteUserCustomCodes();
 extern bool ShouldExecuteAttachCode();
 
 BOOL WINAPI DllMain(

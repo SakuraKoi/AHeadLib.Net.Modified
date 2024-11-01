@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
-using DevExpress.XtraEditors;
-using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using BlueMystic;
 using Microsoft.CodeAnalysis.CSharp;
+using BlueMystic;
 
 namespace AHeadLib.Net {
     public partial class MainForm : Form {
@@ -46,29 +45,30 @@ namespace AHeadLib.Net {
             editProjectName.Text = Path.GetFileNameWithoutExtension(editInputFile.Text);
 
             LogInfo($"Analyzing target file {Path.GetFileName(editInputFile.Text)} ...");
-            string arch;
-            PEFile.analyzeFile(editInputFile.Text, out exportNames, out arch);
-            if (exportNames.Count == 0) {
+            var peFile = new PeNet.PeFile(editInputFile.Text);
+            string arch = peFile.ImageNtHeaders?.FileHeader.MachineResolved;
+
+            var exportTable = peFile.ExportedFunctions?.ToList();
+            if (exportTable.Count == 0) {
                 LogError("Error: Failed parse export table");
                 return;
             }
-            LogSuccess($"Export table has {exportNames.Count} entries");
+            LogSuccess($"Export table has {exportTable.Count} entries");
 
             LogInfo("Filtering unsupported symbols...");
-            var names = exportNames;
-            names.RemoveAll(x => {
-                if (!SyntaxFacts.IsValidIdentifier(x) || x.Contains("@")) {
-                    LogWarn($"Skipped symbol: {x}");
+            exportTable.RemoveAll(x => {
+                if (!SyntaxFacts.IsValidIdentifier(x.Name) || x.Name.Contains("@")) {
+                    LogWarn($"Skipped symbol: #{x.Ordinal} {x.Name}");
                     return true;
                 }
                 return false;
             });
 
-            exportNames = names;
-            LogSuccess($"Hijacking following {exportNames.Count} functions: ");
-            foreach (var name in exportNames) {
-                Log($"      - {name}");
+            LogSuccess($"Hijacking following {exportTable.Count} functions: ");
+            foreach (var x in exportTable) {
+                Log($"      - #{x.Ordinal} \t {x.Name}");
             }
+            this.exportNames = exportTable.Select(x => x.Name).ToList();
             LogSuccess($"Target DLL's Architecture: {arch}");
             Log("");
             LogInfo("Ready to generate");

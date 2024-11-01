@@ -4,7 +4,6 @@
 // Powered by bodong
 
 #include <windows.h>
-#include "MiniTools.h"
 
 #if defined(_WIN64) || defined(_X64) || defined(WIN64) || defined( __LP64__ )
 #define AHEAD_LIB_DOT_NET_X64_BUILD 1
@@ -1322,7 +1321,7 @@ void CheckedLoad()
     {
         TCHAR szMessage[MAX_PATH];
         wsprintf(szMessage, TEXT("Failed load dll from:%s"), szPath);
-        AHEAD_LIB_SHOW_MESSAGE_BOX(nullptr, szMessage, TEXT("AHeadLib.Net Error"), 0);
+        MessageBox(nullptr, szMessage, TEXT("AHeadLib.Net Error"), 0);
         
         ExitProcess(1);
     }

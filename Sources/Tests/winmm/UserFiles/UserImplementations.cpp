@@ -3,9 +3,9 @@
 // https://github.com/bodong1987/AHeadLib.Net
 // Powered by bodong
 
-#include "MemoryPatchConfig.h"
 #include <cassert>
 #include <tchar.h>
+#include <windows.h>
 
 #define STRINGIFY(x) #x
 #define TO_STRING(x) STRINGIFY(x)

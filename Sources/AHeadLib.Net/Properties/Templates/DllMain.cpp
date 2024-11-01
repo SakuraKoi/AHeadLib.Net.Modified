@@ -6,7 +6,6 @@
 #include <windows.h>
 
 extern void CheckedLoad();
-extern void ApplyBuiltinPatches();
 extern void ExecuteUserCustomCodes();
 extern bool ShouldExecuteAttachCode();
 
@@ -25,9 +24,6 @@ BOOL WINAPI DllMain(
 
         if (ShouldExecuteAttachCode())
         {
-            // apply internal patches
-            ApplyBuiltinPatches();
-
             // apply user custom codes
             ExecuteUserCustomCodes();
         }
