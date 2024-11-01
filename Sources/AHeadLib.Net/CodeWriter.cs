@@ -168,7 +168,7 @@ namespace AHeadLib.Net
         /// </summary>
         public void WriteNewLine()
         {
-            _buffer.Append("\n");
+            _buffer.Append(Environment.NewLine);
         }
 
         /// <summary>

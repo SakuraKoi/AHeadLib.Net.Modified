@@ -10,42 +10,21 @@ extern void ExecuteUserCustomCodes();
 extern bool ShouldExecuteAttachCode();
 
 BOOL WINAPI DllMain(
-    HINSTANCE /*hInstance*/,  // handle to DLL module
-    DWORD fdwReason,     // reason for calling function
-    LPVOID lpvReserved)  // reserved
+    HINSTANCE hInstance, // handle to DLL module
+    DWORD fdwReason, // reason for calling function
+    LPVOID lpvReserved) // reserved
 {
     // Perform actions based on the reason for calling.
-    switch (fdwReason)
-    {
-    case DLL_PROCESS_ATTACH:
+    if (fdwReason == DLL_PROCESS_ATTACH) {
         // Initialize once for each new process.
         // Return FALSE to fail DLL load.
+        DisableThreadLibraryCalls(hInstance);
         CheckedLoad();
 
-        if (ShouldExecuteAttachCode())
-        {
+        if (ShouldExecuteAttachCode()) {
             // apply user custom codes
             ExecuteUserCustomCodes();
         }
-
-        break;
-        
-    case DLL_THREAD_ATTACH: // Do thread-specific initialization.
-    case DLL_THREAD_DETACH: // Do thread-specific cleanup.        
-        break;
-
-    case DLL_PROCESS_DETACH:
-
-        if (lpvReserved != nullptr)
-        {
-            break; // do not do cleanup if process termination scenario
-        }
-
-        // Perform any necessary cleanup.
-        break;
-    default:
-        break;
     }
-    return TRUE;  // Successful DLL_PROCESS_ATTACH.
+    return TRUE; // Successful DLL_PROCESS_ATTACH.
 }
-

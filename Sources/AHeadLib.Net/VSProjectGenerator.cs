@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace AHeadLib.Net
 {
@@ -39,22 +40,21 @@ namespace AHeadLib.Net
 
         private void WriteCpp()
         {
-            CodeWriter writer = new CodeWriter(Path.Combine(Directory, "GeneratedFiles", Path.GetFileNameWithoutExtension(DllName) + ".cpp"));
+            var writer = new CodeWriter(Path.Combine(Directory, "GeneratedFiles", Path.GetFileNameWithoutExtension(DllName) + ".cpp"));
 
-            string exportedPointers = string.Join(Environment.NewLine, Methods.Select(x => $"extern \"C\" void* {x}Ptr = nullptr;"));
-            string exportedFunctions = string.Join(Environment.NewLine, Methods.Select(x => $"extern void WINAPI ASM_{x}();"));
-            string exportedLinker = string.Join(Environment.NewLine, Methods.Select(x =>
-            {
-                return 
-                $"#if __X64_BUILD__\n" +
-                $"#pragma comment(linker, \"/EXPORT:{x}=ASM_{x}\")\n" +
-                $"#else\n" +
-                $"#pragma comment(linker, \"/EXPORT:{x}=_ASM_{x}@8\")\n" +
-                $"#endif";
-            }));
-            string bindPointers = string.Join(Environment.NewLine + "    ", Methods.Select(x => $"AHEAD_LIB_DOT_NET_BIND_FUNCTION({x});"));
+            var exportedPointers = string.Join(Environment.NewLine, Methods.Select(x => $"extern \"C\" void* {x}Ptr = nullptr;"));
 
-            string cppCode = Properties.Resources.CppHelper;
+            // ReSharper disable once StringLiteralTypo
+            var exportedFunctions = string.Join(Environment.NewLine, Methods.Select(x => $"extern \"C\" void WINAPI ASM_{x}();"));
+            var exportedLinker = string.Join(Environment.NewLine, Methods.Select(x => $"#if AHEAD_LIB_DOT_NET_X64_BUILD" + Environment.NewLine +
+                $"#pragma comment(linker, \"/EXPORT:{x}=ASM_{x}\")" + Environment.NewLine +
+                $"#else" + Environment.NewLine +
+                $"#pragma comment(linker, \"/EXPORT:{x}=_ASM_{x}@8\")" + Environment.NewLine +
+                $"#endif"));
+
+            var bindPointers = string.Join(Environment.NewLine + "    ", Methods.Select(x => $"AHEAD_LIB_DOT_NET_BIND_FUNCTION({x});"));
+
+            var cppCode = Properties.Resources.CppHelper;
             cppCode = cppCode.Replace("// ${EXPORTED_POINTERS}", exportedPointers);
             cppCode = cppCode.Replace("// ${EXPORTED_FUNCTIONS}", exportedFunctions);
             cppCode = cppCode.Replace("${LIBRARY_NAME}", DllName);
@@ -65,7 +65,7 @@ namespace AHeadLib.Net
             writer.WriteNewLine();
             writer.Save();
 
-            CodeWriter mainWriter = new CodeWriter(Path.Combine(Directory, "GeneratedFiles", Path.GetFileNameWithoutExtension(DllName) + "_DllMain.c"));
+            var mainWriter = new CodeWriter(Path.Combine(Directory, "GeneratedFiles", Path.GetFileNameWithoutExtension(DllName) + "_DllMain.cpp"));
 
             mainWriter.Write(Properties.Resources.DllMain);
             mainWriter.Save();

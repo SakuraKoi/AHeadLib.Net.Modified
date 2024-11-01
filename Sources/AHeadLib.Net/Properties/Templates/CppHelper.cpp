@@ -4,7 +4,6 @@
 // Powered by bodong
 
 #include <windows.h>
-#include "MiniTools.h"
 
 #if defined(_WIN64) || defined(_X64) || defined(WIN64) || defined( __LP64__ )
 #define AHEAD_LIB_DOT_NET_X64_BUILD 1
@@ -13,14 +12,11 @@
 #endif
 
 // checked get function in native dll
-namespace
-{
-    LPVOID CheckedGetFunction(HMODULE module, const char* methodName)
-    {
+namespace {
+    LPVOID CheckedGetFunction(HMODULE module, const char* methodName) {
         const auto Result = reinterpret_cast<LPVOID>(GetProcAddress(module, methodName));
 
-        if (Result == nullptr)
-        {
+        if (Result == nullptr) {
             char szMessage[256];
             wsprintfA(szMessage, "Failed bind method:%s", methodName);
 
@@ -33,7 +29,7 @@ namespace
         }
 
         return Result;
-    }    
+    }
 }
 
 #define AHEAD_LIB_DOT_NET_BIND_FUNCTION(name) name##Ptr = CheckedGetFunction(module, #name)
@@ -51,8 +47,7 @@ namespace
 // bind native dll first
 extern void GetOriginalLibraryPath(TCHAR* bufferPtr, int bufferLength, const TCHAR* libName);
 
-void CheckedLoad()
-{
+void CheckedLoad() {
     TCHAR szPath[MAX_PATH];
 
     GetOriginalLibraryPath(szPath, MAX_PATH, TEXT("${LIBRARY_NAME}"));
@@ -61,12 +56,11 @@ void CheckedLoad()
     // please reset szPath here
     const HMODULE module = LoadLibrary(szPath);
 
-    if (module == nullptr)
-    {
+    if (module == nullptr) {
         TCHAR szMessage[MAX_PATH];
         wsprintf(szMessage, TEXT("Failed load dll from:%s"), szPath);
-        AHEAD_LIB_SHOW_MESSAGE_BOX(nullptr, szMessage, TEXT("AHeadLib.Net Error"), 0);
-        
+        MessageBox(nullptr, szMessage, TEXT("AHeadLib.Net Error"), 0);
+
         ExitProcess(1);
     }
 

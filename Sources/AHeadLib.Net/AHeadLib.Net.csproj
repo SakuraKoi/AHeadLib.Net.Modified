@@ -149,8 +149,8 @@
     <Content Include="main.ico" />
     <Content Include="Properties\Templates\Asm_x64.asm" />
     <Content Include="Properties\Templates\Asm_x86.asm" />
-    <Content Include="Properties\Templates\CppHelper.c" />
-    <Content Include="Properties\Templates\DllMain.c" />
+    <Content Include="Properties\Templates\CppHelper.cpp" />
+    <Content Include="Properties\Templates\DllMain.cpp" />
     <Content Include="Properties\Templates\solution.sln" />
     <Content Include="Properties\Templates\UserImplementations.cpp" />
     <Content Include="Properties\Templates\vcxprojTemplate.filters" />
