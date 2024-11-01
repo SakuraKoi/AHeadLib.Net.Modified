@@ -55,6 +55,7 @@ namespace AHeadLib.Net {
             }
             LogSuccess($"Export table has {exportTable.Count} entries");
 
+            // FIXME some export has only ordinal
             LogInfo("Filtering unsupported symbols...");
             exportTable.RemoveAll(x => {
                 if (!SyntaxFacts.IsValidIdentifier(x.Name) || x.Name.Contains("@")) {
