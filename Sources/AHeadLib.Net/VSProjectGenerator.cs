@@ -39,9 +39,9 @@ namespace AHeadLib.Net
 
         private void WriteCpp()
         {
-            CodeWriter writer = new CodeWriter(Path.Combine(Directory, "GeneratedFiles", Path.GetFileNameWithoutExtension(DllName) + ".c"));
+            CodeWriter writer = new CodeWriter(Path.Combine(Directory, "GeneratedFiles", Path.GetFileNameWithoutExtension(DllName) + ".cpp"));
 
-            string exportedPointers = string.Join(Environment.NewLine, Methods.Select(x => $"void* {x}Ptr = NULL;"));
+            string exportedPointers = string.Join(Environment.NewLine, Methods.Select(x => $"extern \"C\" void* {x}Ptr = nullptr;"));
             string exportedFunctions = string.Join(Environment.NewLine, Methods.Select(x => $"extern void WINAPI ASM_{x}();"));
             string exportedLinker = string.Join(Environment.NewLine, Methods.Select(x =>
             {
@@ -52,7 +52,7 @@ namespace AHeadLib.Net
                 $"#pragma comment(linker, \"/EXPORT:{x}=_ASM_{x}@8\")\n" +
                 $"#endif";
             }));
-            string bindPointers = string.Join(Environment.NewLine + "    ", Methods.Select(x => $"{x}Ptr = __CheckedGetFunction(module, \"{x}\");"));
+            string bindPointers = string.Join(Environment.NewLine + "    ", Methods.Select(x => $"AHEAD_LIB_DOT_NET_BIND_FUNCTION({x});"));
 
             string cppCode = Properties.Resources.CppHelper;
             cppCode = cppCode.Replace("// ${EXPORTED_POINTERS}", exportedPointers);
@@ -80,7 +80,7 @@ namespace AHeadLib.Net
 
                 StringBuilder builder = new StringBuilder();
                 string externDefs = string.Join(Environment.NewLine + "    ", Methods.Select(x => $"EXTERNDEF _{x}Ptr:DWORD"));
-                string funcs = string.Join(Environment.NewLine, Methods.Select(x =>
+                string functionCodes = string.Join(Environment.NewLine, Methods.Select(x =>
                 {
                     builder.Clear();
                     builder.AppendLine($"_ASM_{x}@8 PROC");
@@ -92,7 +92,7 @@ namespace AHeadLib.Net
 
                 string asmCode = Properties.Resources.Asm_x86;
                 asmCode = asmCode.Replace("${EXTERNDEF_POINTERS}", externDefs);
-                asmCode = asmCode.Replace("${FUNCTIONS}", funcs);
+                asmCode = asmCode.Replace("${FUNCTIONS}", functionCodes);
 
                 x86Writer.Write(asmCode);
                 x86Writer.Save();
@@ -103,7 +103,7 @@ namespace AHeadLib.Net
 
                 StringBuilder builder = new StringBuilder();
                 string externDefs = string.Join(Environment.NewLine + "    ", Methods.Select(x => $"EXTERNDEF {x}Ptr:QWORD"));
-                string funcs = string.Join(Environment.NewLine, Methods.Select(x =>
+                string functionCodes = string.Join(Environment.NewLine, Methods.Select(x =>
                 {
                     builder.Clear();
                     builder.AppendLine($"ASM_{x} PROC");
@@ -115,7 +115,7 @@ namespace AHeadLib.Net
 
                 string asmCode = Properties.Resources.Asm_x64;
                 asmCode = asmCode.Replace("${EXTERNDEF_POINTERS}", externDefs);
-                asmCode = asmCode.Replace("${FUNCTIONS}", funcs);
+                asmCode = asmCode.Replace("${FUNCTIONS}", functionCodes);
 
                 x64Writer.Write(asmCode);
                 x64Writer.Save();

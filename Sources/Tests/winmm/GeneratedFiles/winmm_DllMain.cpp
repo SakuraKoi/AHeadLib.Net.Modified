@@ -5,9 +5,9 @@
 
 #include <windows.h>
 
-extern void __CheckedLoad();
-extern void __ExecuteUserCutomCodes();
-extern int __CheckShouldExecuteAttachCode();
+extern void CheckedLoad();
+extern void ExecuteUserCutomCodes();
+extern bool ShouldExecuteAttachCode();
 
 BOOL WINAPI DllMain(
     HINSTANCE hinstDLL,  // handle to DLL module
@@ -20,34 +20,33 @@ BOOL WINAPI DllMain(
     case DLL_PROCESS_ATTACH:
         // Initialize once for each new process.
         // Return FALSE to fail DLL load.
-        __CheckedLoad();
+        CheckedLoad();
 
-        if (__CheckShouldExecuteAttachCode() > 0)
+        if (ShouldExecuteAttachCode())
         {
             // apply user custom codes
-            __ExecuteUserCutomCodes();
+            ExecuteUserCustomCodes();
         }
 
         break;
-
-    case DLL_THREAD_ATTACH:
-        // Do thread-specific initialization.
-        break;
-
-    case DLL_THREAD_DETACH:
-        // Do thread-specific cleanup.
+        
+    case DLL_THREAD_ATTACH: // Do thread-specific initialization.
+    case DLL_THREAD_DETACH: // Do thread-specific cleanup.        
         break;
 
     case DLL_PROCESS_DETACH:
 
-        if (lpvReserved != NULL)
+        if (lpvReserved != nullptr)
         {
             break; // do not do cleanup if process termination scenario
         }
 
         // Perform any necessary cleanup.
         break;
+    default:
+        break;
     }
     return TRUE;  // Successful DLL_PROCESS_ATTACH.
 }
+
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+// Resharper disable ALL
 
 namespace AHeadLib.Net
 {
